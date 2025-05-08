@@ -12,3 +12,8 @@ operation_count = defaultdict(int)
 error_count = 0
 # 客户端连接计数器
 client_count = 0
+
+def handle_client(client_socket):
+    global tuple_space, operation_count, error_count
+    global client_count
+    client_count += 1
