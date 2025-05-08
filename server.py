@@ -59,3 +59,30 @@ client_socket.send(result.encode())
         print(f"Error handling client: {e}")
     finally:
         client_socket.close()
+
+
+def print_summary():
+    while True:
+        time.sleep(10)
+        total_operations = sum(operation_count.values())
+        num_tuples = len(tuple_space)
+        if num_tuples > 0:
+            total_key_size = sum(len(key) for key in tuple_space)
+            total_value_size = sum(len(value) for value in tuple_space.values())
+            avg_key_size = total_key_size / num_tuples
+            avg_value_size = total_value_size / num_tuples
+            avg_tuple_size = (total_key_size + total_value_size) / num_tuples
+        else:
+            avg_key_size = 0
+            avg_value_size = 0
+            avg_tuple_size = 0
+        print(f"Number of tuples: {num_tuples}")
+        print(f"Average tuple size: {avg_tuple_size}")
+        print(f"Average key size: {avg_key_size}")
+        print(f"Average value size: {avg_value_size}")
+        print(f"Total clients connected: {client_count}")
+        print(f"Total operations: {total_operations}")
+        print(f"Total READs: {operation_count['READ']}")
+        print(f"Total GETs: {operation_count['GET']}")
+        print(f"Total PUTs: {operation_count['PUT']}")
+        print(f"Total errors: {error_count}")
