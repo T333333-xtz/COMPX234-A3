@@ -102,3 +102,15 @@ def start_server(port):
         client_socket, addr = server_socket.accept()
         client_thread = threading.Thread(target=handle_client, args=(client_socket,))
         client_thread.start()
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python server.py <port>")
+        sys.exit(1)
+    port = int(sys.argv[1])
+    if 50000 <= port <= 59999:
+        start_server(port)
+    else:
+        print("Port should be in the range 50000 - 59999")
