@@ -53,3 +53,9 @@ try:
             else:
                 result = f"{len('ERR Invalid command'):03d}ERR Invalid command"
                 error_count += 1
+
+client_socket.send(result.encode())
+    except Exception as e:
+        print(f"Error handling client: {e}")
+    finally:
+        client_socket.close()
