@@ -86,3 +86,19 @@ def print_summary():
         print(f"Total GETs: {operation_count['GET']}")
         print(f"Total PUTs: {operation_count['PUT']}")
         print(f"Total errors: {error_count}")
+
+
+def start_server(port):
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('0.0.0.0', port))
+    server_socket.listen(5)
+    print(f"Server listening on port {port}")
+
+    summary_thread = threading.Thread(target=print_summary)
+    summary_thread.daemon = True
+    summary_thread.start()
+
+    while True:
+        client_socket, addr = server_socket.accept()
+        client_thread = threading.Thread(target=handle_client, args=(client_socket,))
+        client_thread.start()
