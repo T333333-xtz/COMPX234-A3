@@ -45,3 +45,13 @@ def run_client(hostname, port, file_path):
         print(f"Error: {e}")
     finally:
         client_socket.close()
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 4:
+        print("Usage: python client.py <hostname> <port> <file_path>")
+        sys.exit(1)
+    hostname = sys.argv[1]
+    port = int(sys.argv[2])
+    file_path = sys.argv[3]
+    run_client(hostname, port, file_path)
