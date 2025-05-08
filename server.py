@@ -22,3 +22,7 @@ try:
             data = client_socket.recv(1024).decode()
             if not data:
                 break
+            size = int(data[:3])
+            command = data[3]
+            key = data[4:].split(' ')[0]
+            value = data[4 + len(key):].strip() if command == 'P' else None
